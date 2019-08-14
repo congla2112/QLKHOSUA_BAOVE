@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author DELL
- */
+
 public class Nhapkho {
     private String maphieu;
     private String hangcungcap;

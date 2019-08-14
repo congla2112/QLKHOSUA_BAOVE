@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author My PC
- */
+
 public class khbaocao {
    String makh,tenkh;
    int sumdh;

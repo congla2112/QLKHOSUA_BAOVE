@@ -5,10 +5,6 @@
  */
 package model;
 
-/**
- *
- * @author trung
- */
 public class Khachhang {
     String makh, tenkh, diachi, sodienthoai, email, cmt;
     boolean gioitinh;

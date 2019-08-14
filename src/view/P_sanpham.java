@@ -58,6 +58,7 @@ public class P_sanpham extends javax.swing.JPanel {
                 public void valueChanged(ListSelectionEvent lse) {
                     index = tlb_sanpham.getSelectedRow();
                     if (index >= 0) {
+                        txt_masp.setEnabled(false);
                         txt_masp.setText(tlb_sanpham.getValueAt(index, 0).toString());
                         txt_tensp.setText(tlb_sanpham.getValueAt(index, 1).toString());
 
@@ -65,29 +66,87 @@ public class P_sanpham extends javax.swing.JPanel {
                             cb_donvi.setSelectedIndex(0);
                         } else if (tlb_sanpham.getValueAt(index, 2).toString().equalsIgnoreCase("Hộp")) {
                             cb_donvi.setSelectedIndex(1);
-                        } else {
+                        } else  {
                             cb_donvi.setSelectedIndex(2);
                         }
                         txt_gianhap.setText(tlb_sanpham.getValueAt(index, 3).toString());
                         txt_giaban.setText(tlb_sanpham.getValueAt(index, 4).toString());
 
-                        if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Vinamilk-CN")) {
+                        if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Vinamilk")) {
                             cb_hang.setSelectedIndex(0);
-                        } else {
+                        } 
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Dutch Lady")) {
                             cb_hang.setSelectedIndex(1);
                         }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Nutifood")) {
+                            cb_hang.setSelectedIndex(2);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Nestle")) {
+                            cb_hang.setSelectedIndex(3);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("IDP")) {
+                            cb_hang.setSelectedIndex(4);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Mộc châu")) {
+                            cb_hang.setSelectedIndex(5);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("TH true milk")) {
+                            cb_hang.setSelectedIndex(6);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Abbott")) {
+                            cb_hang.setSelectedIndex(7);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Aptamil")) {
+                            cb_hang.setSelectedIndex(8);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Enfa")) {
+                            cb_hang.setSelectedIndex(9);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Meiji")) {
+                            cb_hang.setSelectedIndex(10);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 5).toString().equalsIgnoreCase("Morinaga")) {
+                            cb_hang.setSelectedIndex(11);
+                        }
+                        
                         txt_soluongnhap.setText(tlb_sanpham.getValueAt(index, 6).toString());
+                        
                         if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 1")) {
                             cbb_vitri.setSelectedIndex(0);
-                        } else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 2")) {
+                        } 
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 2")) {
                             cbb_vitri.setSelectedIndex(1);
-                        } else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 3")) {
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 3")) {
                             cbb_vitri.setSelectedIndex(2);
-                        } else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Tồn Kho")) {
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 4")) {
                             cbb_vitri.setSelectedIndex(3);
-                        } else {
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 5")) {
                             cbb_vitri.setSelectedIndex(4);
-                        }                 
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 6")) {
+                            cbb_vitri.setSelectedIndex(5);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 7")) {
+                            cbb_vitri.setSelectedIndex(6);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 8")) {
+                            cbb_vitri.setSelectedIndex(7);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 9")) {
+                            cbb_vitri.setSelectedIndex(8);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 10")) {
+                            cbb_vitri.setSelectedIndex(9);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Tồn kho")) {
+                            cbb_vitri.setSelectedIndex(10);
+                        }
+                        else if (tlb_sanpham.getValueAt(index, 7).toString().equalsIgnoreCase("Hàng tặng")) {
+                            cbb_vitri.setSelectedIndex(11);
+                        }
 
                         tlb_sanpham.scrollRectToVisible(tlb_sanpham.getCellRect(index, 0, true));
 
@@ -110,6 +169,7 @@ public class P_sanpham extends javax.swing.JPanel {
             ResultSet rs = statement.executeQuery(sql);
             list.clear();
             while (rs.next()) {
+                txt_masp.setEnabled(false);
                 masp = rs.getString(1);
                 tensp = rs.getString(2);
                 donvi = rs.getString(3);
@@ -249,7 +309,7 @@ public class P_sanpham extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bt_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_tim = new javax.swing.JButton();
@@ -278,7 +338,18 @@ public class P_sanpham extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tlb_sanpham);
 
+        txt_masp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_maspActionPerformed(evt);
+            }
+        });
+
         cb_donvi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thùng", "Hộp", "Chai" }));
+        cb_donvi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_donviActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Giá bán:");
 
@@ -323,11 +394,11 @@ public class P_sanpham extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add-Folder-icon.png"))); // NOI18N
-        jButton1.setText("Thêm Sản Phẩm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add-Folder-icon.png"))); // NOI18N
+        bt_them.setText("Thêm Sản Phẩm");
+        bt_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_themActionPerformed(evt);
             }
         });
 
@@ -403,7 +474,7 @@ public class P_sanpham extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_lammoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_sua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_tim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -420,7 +491,7 @@ public class P_sanpham extends javax.swing.JPanel {
                     .addComponent(txt_giaban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(bt_them))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_tensp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,11 +521,18 @@ public class P_sanpham extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_themActionPerformed
         // TODO add your handling code here:
         if (txt()) {
 
             try {
+                 for (int i = 0; i < list.size(); i++) {
+                    String maspInput = "SP"+txt_masp.getText();
+                    if (maspInput.equalsIgnoreCase(list.get(i).getMasp())) {
+                        JOptionPane.showMessageDialog(this, "Mã sản phẩm nhập đã có vui lòng thử lại");
+
+                    }
+                }
 
                
 
@@ -482,7 +560,7 @@ public class P_sanpham extends javax.swing.JPanel {
 
             // TODO add your handling code here:
         }  
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bt_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
@@ -553,9 +631,13 @@ public class P_sanpham extends javax.swing.JPanel {
 
                     find_check = true;
                     tlb_sanpham.setRowSelectionInterval(i, i);
-                }else if(find_id.equalsIgnoreCase(list.get(i).getTensp())){
+                }
+            }
+             for (int i = 0; i < list.size(); i++) {
+                if (find_id.equalsIgnoreCase(list.get(i).getTensp())) {
+
+                    find_check = true;
                     tlb_sanpham.setRowSelectionInterval(i, i);
-                    find_check=true;
                 }
             }
 
@@ -569,8 +651,9 @@ public class P_sanpham extends javax.swing.JPanel {
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
         // TODO add your handling code here:
+        txt_masp.setEnabled(true);
         txt_masp.setText("");
-        txt_masp.setEditable(true);
+       // txt_masp.setEditable(true);
         txt_tensp.setText("");
         txt_gianhap.setText("");
         txt_giaban.setText("");
@@ -582,8 +665,17 @@ public class P_sanpham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbb_vitriActionPerformed
 
+    private void cb_donviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_donviActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_donviActionPerformed
+
+    private void txt_maspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maspActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_maspActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_them;
     private javax.swing.JButton btn_lammoi;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_tim;
@@ -591,7 +683,6 @@ public class P_sanpham extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cb_donvi;
     private javax.swing.JComboBox<String> cb_hang;
     private javax.swing.JComboBox<String> cbb_vitri;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

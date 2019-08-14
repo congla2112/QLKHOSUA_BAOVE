@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author DELL
- */
+
 public class Donhang1 {
     int madh;
    String mathekh;

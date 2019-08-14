@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author DELL
- */
+
 public class ChiTietDonHang {
     String madh_ct, mathekh_CT,ngaymua_CT,trangthai_CT,manv;
     String masp,tensp;

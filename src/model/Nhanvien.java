@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author My PC
- */
+
 public class Nhanvien {
     String manv,tennv,sodienthoai,diachi,email,username,pass,role;
 

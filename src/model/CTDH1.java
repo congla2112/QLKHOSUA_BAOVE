@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author DELL
- */
+
 public class CTDH1 {
     String madh_ct;
     String masp,tensp;

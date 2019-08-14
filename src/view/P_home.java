@@ -8,10 +8,7 @@ package view;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author DELL
- */
+
 public class P_home extends javax.swing.JPanel {
 
     /**

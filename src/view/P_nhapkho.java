@@ -75,7 +75,6 @@ public class P_nhapkho extends javax.swing.JPanel {
             model.addColumn("Vị Trí");
             model_searchNV.addColumn("Mã nhân viên");
             model_searchNV.addColumn("Tên nhân viên");
-            txt_madh.setEditable(false);
             txt_manv.setEditable(false);
             txt_ngaynhap.setEditable(false);
             txt_hansd.setEditable(true);
@@ -86,23 +85,89 @@ public class P_nhapkho extends javax.swing.JPanel {
                 public void valueChanged(ListSelectionEvent lse) {
                     index = tbl_bang.getSelectedRow();
                     if (!searchNV && index >= 0) {
-                        txt_madh.setEditable(false);
+                        txt_madh.setEnabled(false);
+                        txt_ngaynhap.setEditable(false);
                         txt_madh.setText(tbl_bang.getValueAt(index, 0).toString());
-                        if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Vinamilk-CT")) {
+                        
+                        if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Vinamilk")) {
                             cbb_ncc.setSelectedIndex(0);
-                        } else {
+                        } 
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Dutch Lady")) {
                             cbb_ncc.setSelectedIndex(1);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Nutifood")) {
+                            cbb_ncc.setSelectedIndex(2);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Nestle")) {
+                            cbb_ncc.setSelectedIndex(3);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("IDP")) {
+                            cbb_ncc.setSelectedIndex(4);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Mộc châu")) {
+                            cbb_ncc.setSelectedIndex(5);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("TH true milk")) {
+                            cbb_ncc.setSelectedIndex(6);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Abbott")) {
+                            cbb_ncc.setSelectedIndex(7);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Aptamil")) {
+                            cbb_ncc.setSelectedIndex(8);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Enfa")) {
+                            cbb_ncc.setSelectedIndex(9);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Meiji")) {
+                            cbb_ncc.setSelectedIndex(10);
+                        }
+                        else if (tbl_bang.getValueAt(index, 1).toString().equalsIgnoreCase("Morinaga")) {
+                            cbb_ncc.setSelectedIndex(11);
                         }
                         txt_ngaynhap.setText(tbl_bang.getValueAt(index, 2).toString());
                         txt_tongtien.setText(tbl_bang.getValueAt(index, 3).toString());
                         txt_xuatxu.setText(tbl_bang.getValueAt(index, 4).toString());
                         txt_hansd.setText(tbl_bang.getValueAt(index, 5).toString());
                         txt_manv.setText(tbl_bang.getValueAt(index, 6).toString());
+                        
                         if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 1")) {
-                            cbb_vitri.setSelectedItem(0);
-                        } else {
-                            cbb_vitri.setSelectedItem(1);
+                            cbb_vitri.setSelectedIndex(0);
+                        } 
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 2")) {
+                            cbb_vitri.setSelectedIndex(1);
                         }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 3")) {
+                            cbb_vitri.setSelectedIndex(2);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 4")) {
+                            cbb_vitri.setSelectedIndex(5);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 5")) {
+                            cbb_vitri.setSelectedIndex(6);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 6")) {
+                            cbb_vitri.setSelectedIndex(5);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 7")) {
+                            cbb_vitri.setSelectedIndex(6);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 8")) {
+                            cbb_vitri.setSelectedIndex(7);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 9")) {
+                            cbb_vitri.setSelectedIndex(8);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Kệ 10")) {
+                            cbb_vitri.setSelectedIndex(9);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Tồn kho")) {
+                            cbb_vitri.setSelectedIndex(10);
+                        }
+                        else if (tbl_bang.getValueAt(index, 7).toString().equalsIgnoreCase("Hàng tặng")) {
+                            cbb_vitri.setSelectedIndex(11);
+                        }
+
                         tbl_bang.scrollRectToVisible(tbl_bang.getCellRect(index, 0, true));
                     }
                     if (searchNV) {
@@ -128,6 +193,7 @@ public class P_nhapkho extends javax.swing.JPanel {
             ResultSet rs = statement.executeQuery(sql);
             list.clear();
             while (rs.next()) {
+                txt_madh.setEnabled(false);
                 maphieu = rs.getString(1);
                 hangcungcap = rs.getString(2);
                 ngaynhap = rs.getString(3);
@@ -157,6 +223,7 @@ public class P_nhapkho extends javax.swing.JPanel {
     }
 
     public boolean txt() {
+        
         try {
             
             
@@ -165,6 +232,53 @@ public class P_nhapkho extends javax.swing.JPanel {
                 
                 return false;
             }
+          String  madh = txt_madh.getText().trim();
+            if(!madh.matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "Mã phiếu hàng phải nhập số");
+                return false;
+            }
+            if (txt_tongtien.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Tổng tiền không được để trống");
+                
+                return false;
+            }
+         
+            if (txt_manv.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống");
+               
+                return false;
+            }
+            
+            
+            
+            if (!txt_tongtien.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "bạn phải nhập số ở tổng tiền");
+                return false;
+            }
+
+           
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi" + e);
+            return false;
+        }
+        return true;
+    }
+    public boolean txtsua() {
+        
+        try {
+            
+            
+            if (txt_madh.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Mã không được để trống");
+                
+                return false;
+            }
+//          String  madh = txt_madh.getText().trim();
+//            if(!madh.matches("\\d+")){
+//                JOptionPane.showMessageDialog(this, "Mã phiếu hàng phải nhập số");
+//                return false;
+//            }
             if (txt_tongtien.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Tổng tiền không được để trống");
                 
@@ -316,6 +430,11 @@ public class P_nhapkho extends javax.swing.JPanel {
         });
 
         cbb_ncc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vinamilk", "Dutch Lady", "Nutifood", "Nestle", "IDP", "Mộc châu", "TH true milk", "Abbott", "Aptamil", "Enfa", "Meiji", "Morinaga", " " }));
+        cbb_ncc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_nccActionPerformed(evt);
+            }
+        });
 
         btn_lammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new-icon.png"))); // NOI18N
         btn_lammoi.setText("Làm Mới Phiếu ");
@@ -454,7 +573,8 @@ public class P_nhapkho extends javax.swing.JPanel {
             try {
 
                 for (int i = 0; i < list.size(); i++) {
-                    if (txt_madh.getText().equalsIgnoreCase(list.get(i).getMaphieu())) {
+                    String maphInput = "PH"+txt_madh.getText();
+                    if (maphInput.equalsIgnoreCase(list.get(i).getMaphieu())) {
                         JOptionPane.showMessageDialog(this, "Mã phiếu nhập đã có vui lòng thử mã phiếu khác");
 
                     }
@@ -463,7 +583,7 @@ public class P_nhapkho extends javax.swing.JPanel {
                 Connection connection = DBUtils.getConnection();
                 String sql = "insert into Nhapkho values(?,?,?,?,?,?,?,?)";
                 PreparedStatement pst1 = connection.prepareStatement(sql);
-                pst1.setString(1, txt_madh.getText());
+                pst1.setString(1, "PH"+txt_madh.getText());
                 pst1.setString(2, cbb_ncc.getSelectedItem().toString());
                 pst1.setString(3, txt_ngaynhap.getText());
                 pst1.setString(4, txt_tongtien.getText());
@@ -510,7 +630,7 @@ public class P_nhapkho extends javax.swing.JPanel {
 
     private void btn_suadonhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suadonhangActionPerformed
         // TODO add your handling code here:
-        if (txt()) {
+        if (txtsua()) {
 
             try {
 
@@ -544,38 +664,57 @@ public class P_nhapkho extends javax.swing.JPanel {
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
         // TODO add your handling code here:
+        txt_madh.setEnabled(true);
         Calendar cal = Calendar.getInstance();
         txt_ngaynhap.setText(cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
         txt_madh.setText("");
-        txt_madh.setEditable(true);
         txt_tongtien.setText("");
         txt_xuatxu.setText("");
         txt_hansd.setText("");
         txt_manv.setText("");
         tbl_bang.setModel(model);
         searchNV = false;
-        load_list();
+        //load_list();
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
         // TODO add your handling code here:
         boolean find_check = false;
         try {
-            String find_id = JOptionPane.showInputDialog(this, "Nhập ngày muốn tìm kiếm");
+            String find_id = JOptionPane.showInputDialog(this, "Nhập mã phiếu hàng, ngày nhập, mã nv, xuất xứ, nhà cung cấp hoặc vị trí muốn tìm kiếm");
             while (find_id.equals("")) {
-                JOptionPane.showMessageDialog(this, "Không để trống ngày nhập!");
-                find_id = JOptionPane.showInputDialog(this, "Nhập ngày muốn tìm kiếm");
+                JOptionPane.showMessageDialog(this, "Không để trống !");
+                find_id = JOptionPane.showInputDialog(this, "Nhập mã phiếu hàng, ngày nhập, mã nv, xuất xứ nhà cung cấp hoặc vị trí muốn tìm kiếm");
             }
             for (int i = 0; i < list.size(); i++) {
                 if (find_id.equalsIgnoreCase(list.get(i).getNgaynhap())) {
 
                     find_check = true;
                     tbl_bang.setRowSelectionInterval(i, i);
+                }else if(find_id.equalsIgnoreCase(list.get(i).getMaphieu())){
+                    tbl_bang.setRowSelectionInterval(i, i);
+                    find_check = true;
+                }
+                else if(find_id.equalsIgnoreCase(list.get(i).getManv1())){
+                    tbl_bang.setRowSelectionInterval(i, i);
+                    find_check = true;
+                }
+                else if(find_id.equalsIgnoreCase(list.get(i).getXuatxu())){
+                    tbl_bang.setRowSelectionInterval(i, i);
+                    find_check = true;
+                }
+                else if(find_id.equalsIgnoreCase(list.get(i).getVitri())){
+                    tbl_bang.setRowSelectionInterval(i, i);
+                    find_check = true;
+                }
+                else if(find_id.equalsIgnoreCase(list.get(i).getHangcungcap())){
+                    tbl_bang.setRowSelectionInterval(i, i);
+                    find_check = true;
                 }
             }
 
             if (!find_check) {
-                JOptionPane.showMessageDialog(this, "ngày nhập không có trong dữ liệu!");
+                JOptionPane.showMessageDialog(this, "Thông tin không có trong dữ liệu! Yêu cầu nhập đúng");
             }
 
         } catch (NullPointerException e2) {
@@ -640,6 +779,10 @@ public class P_nhapkho extends javax.swing.JPanel {
     private void txt_xuatxuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_xuatxuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_xuatxuActionPerformed
+
+    private void cbb_nccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_nccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbb_nccActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

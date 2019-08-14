@@ -34,7 +34,7 @@ public class P_khachhang extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
     String makh, tenkh, diachi, sodienthoai, email, cmt;
     boolean gioitinh;
-
+    
     public void setdata() {
         try {
             model.addColumn("Mã Thẻ Khách Hàng");
@@ -45,7 +45,7 @@ public class P_khachhang extends javax.swing.JPanel {
             model.addColumn("Số CMTND");
             model.addColumn("Giới Tính");
            
-            txt_mathe.setEditable(false);
+            
             tbl_khachhang.setModel(model);
             load_list();
             tbl_khachhang.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -53,6 +53,7 @@ public class P_khachhang extends javax.swing.JPanel {
                 public void valueChanged(ListSelectionEvent lse) {
                     index = tbl_khachhang.getSelectedRow();
                     if (index >= 0) {
+                        txt_mathe.setEnabled(false);
                         txt_mathe.setText(tbl_khachhang.getValueAt(index, 0).toString());
                         txt_tenkh.setText(tbl_khachhang.getValueAt(index, 1).toString());
                         txt_diachikh.setText(tbl_khachhang.getValueAt(index, 2).toString());
@@ -89,6 +90,7 @@ public class P_khachhang extends javax.swing.JPanel {
             ResultSet rs = statement.executeQuery(sql);
             list.clear();
             while (rs.next()) {
+                txt_mathe.setEnabled(false);
                 makh = rs.getString(1);
                 tenkh = rs.getString(2);
                 diachi = rs.getString(3);
@@ -125,6 +127,11 @@ public class P_khachhang extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Mã khách hàng không được để trống");
                 return false;
             }
+//            String  makh = txt_mathe.getText().trim();
+//            if(!makh.matches("\\d+")){
+//                JOptionPane.showMessageDialog(this, "Mã khách hàng phải nhập số");
+//                return false;
+//            }
             if (txt_tenkh.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Tên khách hàng không được để trống");
                 return false;
@@ -157,8 +164,84 @@ public class P_khachhang extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Email phải đúng định dạng!VD:abc@abc.xyz");
                 return false;
             }    
-            if (!txt_cmtnd.getText().matches("\\d+") || txt_cmtnd.getText().length() != 9) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập số CMTND là số và có 9 chữ số");
+            if (!txt_cmtnd.getText().matches("\\d+") ) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số CMTND là số");
+                return false;
+            }
+              int cmt = txt_cmtnd.getText().length();
+             if (cmt != 9 && cmt !=12 ) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số CMTND là số và có 9 hoặc 12 số");
+                return false;
+            }
+            if (!ck_nam.isSelected() && !ck_nu.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Chưa chọn giới tính");
+                return false;
+            }
+             if (ck_nam.isSelected()) {
+                gioitinh = true;
+            } else {
+                gioitinh = false;
+            }
+           
+           
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi" + e);
+            return false;
+        }
+        return true;
+    }
+     public boolean txtsua() {
+        try {
+            
+            if (txt_mathe.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng không được để trống");
+                return false;
+            }
+            String  makh = txt_mathe.getText().trim();
+            if(!makh.matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "Mã khách hàng phải nhập số");
+                return false;
+            }
+            if (txt_tenkh.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Tên khách hàng không được để trống");
+                return false;
+            }
+            if (txt_diachikh.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Địa chỉ khách hàng không được để trống");
+                return false;
+            }
+            if (txt_sodt.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại khách hàng không được để trống");
+                return false;
+            }
+            if (txt_email.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Email khách hàng không được để trống");
+                return false;
+            }
+            if (txt_cmtnd.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Số CMTND khách hàng không được để trống");
+                return false;
+            }
+            
+            
+            
+            
+            if (!txt_sodt.getText().matches("\\d+") || txt_sodt.getText().length() != 10) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại là số và có 10 chữ số");
+                return false;
+            }
+            if (!txt_email.getText().matches("\\w+@+\\w+.+\\w")) {
+                JOptionPane.showMessageDialog(this, "Email phải đúng định dạng!VD:abc@abc.xyz");
+                return false;
+            }    
+            if (!txt_cmtnd.getText().matches("\\d+") ) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số CMTND là số");
+                return false;
+            }
+            int cmt = txt_cmtnd.getText().length();
+             if (cmt != 9 && cmt !=12 ) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số CMTND là số và có 9 hoặc 12 số");
                 return false;
             }
             if (!ck_nam.isSelected() && !ck_nu.isSelected()) {
@@ -183,6 +266,7 @@ public class P_khachhang extends javax.swing.JPanel {
     public P_khachhang() {
         initComponents();
         setdata();
+       
     }
 
     /**
@@ -218,7 +302,6 @@ public class P_khachhang extends javax.swing.JPanel {
         btn_xoa = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_tim = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setMaximumSize(new java.awt.Dimension(915, 540));
@@ -337,9 +420,6 @@ public class P_khachhang extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Print-icon.png"))); // NOI18N
-        jButton1.setText("In");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -368,15 +448,13 @@ public class P_khachhang extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(ck_nam)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(ck_nu))
-                        .addComponent(txt_cmtnd)
-                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ck_nam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ck_nu))
+                    .addComponent(txt_cmtnd)
+                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_sua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -418,8 +496,7 @@ public class P_khachhang extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_sodt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_sua)
-                    .addComponent(jButton1))
+                    .addComponent(btn_sua))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_tim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -429,7 +506,7 @@ public class P_khachhang extends javax.swing.JPanel {
 
     private void btn_lmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lmActionPerformed
         // TODO add your handling code here
-        txt_mathe.setEditable(true);
+        txt_mathe.setEnabled(true);
         txt_sodt.setText("");
         txt_email.setText("");
         txt_mathe.setText("");
@@ -442,12 +519,13 @@ public class P_khachhang extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        if (txt()) {
+        if (txtsua()) {
 
             try {
 
                 for (int i = 0; i < list.size(); i++) {
-                    if (txt_mathe.getText().equalsIgnoreCase(list.get(i).getMakh())) {
+                    String makhInput = "KH"+txt_mathe.getText();
+                    if (makhInput.equalsIgnoreCase(list.get(i).getMakh())) {
                         JOptionPane.showMessageDialog(this, "Mã khách hàng đã được đăng ký mời nhập mã khách hàng khác");
 
                     }
@@ -456,7 +534,7 @@ public class P_khachhang extends javax.swing.JPanel {
                 Connection connection = DBUtils.getConnection();
                 String sql = "insert into khachhang values(?,?,?,?,?,?,?)";
                 PreparedStatement pst = connection.prepareStatement(sql);
-                pst.setString(1, txt_mathe.getText());
+                pst.setString(1, "KH"+txt_mathe.getText());
                 pst.setString(2, txt_tenkh.getText());
                 pst.setString(3, txt_diachikh.getText());
                 pst.setString(4, txt_sodt.getText());
@@ -538,13 +616,20 @@ public class P_khachhang extends javax.swing.JPanel {
         // TODO add your handling code here:
         boolean find_check = false;
         try {
-            String find_id = JOptionPane.showInputDialog(this, "Nhập mã khách hàng cần tìm");
+            String find_id = JOptionPane.showInputDialog(this, "Nhập mã hoặc tên khách hàng cần tìm");
             while (find_id.equals("")) {
-                JOptionPane.showMessageDialog(this, "Không để trống mã!");
-                find_id = JOptionPane.showInputDialog(this, "Nhập mã khách hàng cần tìm");
+                JOptionPane.showMessageDialog(this, "Không để trống !");
+                find_id = JOptionPane.showInputDialog(this, "Nhập mã hoặc tên khách hàng cần tìm");
             }
             for (int i = 0; i < list.size(); i++) {
                 if (find_id.equalsIgnoreCase(list.get(i).getMakh())) {
+
+                    find_check = true;
+                    tbl_khachhang.setRowSelectionInterval(i, i);
+                }
+            }
+            for (int i = 0; i < list.size(); i++) {
+                if (find_id.equalsIgnoreCase(list.get(i).getTenkh())) {
 
                     find_check = true;
                     tbl_khachhang.setRowSelectionInterval(i, i);
@@ -582,7 +667,6 @@ public class P_khachhang extends javax.swing.JPanel {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JRadioButton ck_nam;
     private javax.swing.JRadioButton ck_nu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

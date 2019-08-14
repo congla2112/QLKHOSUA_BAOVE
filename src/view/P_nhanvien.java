@@ -71,12 +71,14 @@ public class P_nhanvien extends javax.swing.JPanel {
             model.addColumn("Password");
             model.addColumn("Quyền");
             tbl_nhanvien.setModel(model);
+            
             load_list();
             tbl_nhanvien.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
                     index = tbl_nhanvien.getSelectedRow();
                     if (index >= 0) {
+                        txt_manv.setEnabled(false);
                         txt_manv.setText(tbl_nhanvien.getValueAt(index, 0).toString());
                         txt_tennv.setText(tbl_nhanvien.getValueAt(index, 1).toString());
                         txt_sodt.setText(tbl_nhanvien.getValueAt(index, 2).toString());
@@ -118,6 +120,7 @@ public class P_nhanvien extends javax.swing.JPanel {
             ResultSet rs = statement.executeQuery(sql);
             list.clear();
             while (rs.next()) {
+                txt_manv.setEnabled(false);
                 manv = rs.getString(1);
                 tennv = rs.getString(2);
                 sodienthoai = rs.getString(3);
@@ -152,8 +155,14 @@ public class P_nhanvien extends javax.swing.JPanel {
     }
      public boolean txt() {
         try {
+            
             if (txt_manv.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống");
+                return false;
+            }
+            String  manv = txt_manv.getText().trim();
+            if(!manv.matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "Mã nhân viên phải nhập số");
                 return false;
             }
             if (txt_tennv.getText().equals("")) {
@@ -217,7 +226,8 @@ public class P_nhanvien extends javax.swing.JPanel {
                 }
             }
             for (int i = 0; i < list.size(); i++) {
-                    if (txt_manv.getText().equalsIgnoreCase(list.get(i).getManv())) {
+                String manvInput = "NV"+txt_manv.getText();
+                    if (manvInput.equalsIgnoreCase(list.get(i).getManv())) {
                         JOptionPane.showMessageDialog(this, "Mã nhân viên đã có vui lòng thử mã nhân viên khác");
                     return false;
                     }
@@ -239,6 +249,11 @@ public class P_nhanvien extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Không được để trống trường dữ liệu");
                 return false;
             }
+             String  manv = txt_manv.getText().trim();
+//            if(!manv.matches("\\d+")){
+//                JOptionPane.showMessageDialog(this, "Mã nhân viên phải nhập số");
+//                return false;
+//            }
             if (!txt_sodt.getText().matches("\\d+") || txt_sodt.getText().length() != 10) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại là số và có 10 chữ số");
                 return false;
@@ -262,13 +277,19 @@ public class P_nhanvien extends javax.swing.JPanel {
                 gioitinh = false;
             }
             
-            for (int i = 0; i < list.size(); i++) {
-
-                if (txt_user.getText().equals(list.get(i).getUsername())&&!txt_user.getText().equals(list.get(tbl_nhanvien.getSelectedRow()).getUsername())) {
-                    JOptionPane.showMessageDialog(this, "Username đã có vui lòng thử username khác");
-                    return false;
-                }
-            }
+//            for (int i = 0; i < list.size(); i++) {
+//
+//                if (txt_user.getText().equals(list.get(i).getUsername())&&!txt_user.getText().equals(list.get(tbl_nhanvien.getSelectedRow()).getUsername())) {
+//                    JOptionPane.showMessageDialog(this, "Username đã có vui lòng thử username khác");
+//                    return false;
+//                }
+//            }
+//            for (int i = 0; i < list.size(); i++) {
+//                    if (txt_manv.getText().equalsIgnoreCase(list.get(i).getManv())) {
+//                      JOptionPane.showMessageDialog(this, "Mã nhân viên đã có vui lòng thử mã nhân viên khác");
+//                  return false;
+//                   }
+//                }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Không được trùng ID");
@@ -281,6 +302,7 @@ public class P_nhanvien extends javax.swing.JPanel {
     public P_nhanvien() {
         initComponents();
         setdata();
+        txt_manv.setEnabled(false);
     }
 
     /**
@@ -562,7 +584,7 @@ public class P_nhanvien extends javax.swing.JPanel {
                 Connection connection = DBUtils.getConnection();
                 String sql = "insert into nhanvien values(?,?,?,?,?,?,?,?,?)";
                 PreparedStatement pst = connection.prepareStatement(sql);
-                pst.setString(1, txt_manv.getText());
+                pst.setString(1,"NV"+ txt_manv.getText());
                 pst.setString(2, txt_tennv.getText());
                 pst.setString(3, txt_sodt.getText());
                 pst.setString(4, txt_diachi.getText());
@@ -588,6 +610,7 @@ public class P_nhanvien extends javax.swing.JPanel {
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
         // TODO add your handling code here:
+        txt_manv.setEnabled(true);
         txt_diachi.setText("");
         txt_email.setText("");
         txt_manv.setText("");
@@ -603,13 +626,27 @@ public class P_nhanvien extends javax.swing.JPanel {
         // TODO add your handling code here:
         boolean find_check = false;
         try {
-            String find_id = JOptionPane.showInputDialog(this, "Nhập mã nhân viên cần tìm");
+            String find_id = JOptionPane.showInputDialog(this, "Nhập mã ,tên hoặc username nhân viên cần tìm");
             while (find_id.equals("")) {
-                JOptionPane.showMessageDialog(this, "Không để trống mã!");
-                find_id = JOptionPane.showInputDialog(this, "Nhập mã nhân viên cần tìm");
+                JOptionPane.showMessageDialog(this, "Không để trống !");
+                find_id = JOptionPane.showInputDialog(this, "Nhập mã ,tên hoặc username  nhân viên cần tìm");
             }
             for (int i = 0; i < list.size(); i++) {
                 if (find_id.equalsIgnoreCase(list.get(i).getManv())) {
+
+                    find_check = true;
+                    tbl_nhanvien.setRowSelectionInterval(i, i);
+                }
+            }
+            for (int i = 0; i < list.size(); i++) {
+                if (find_id.equalsIgnoreCase(list.get(i).getTennv())) {
+
+                    find_check = true;
+                    tbl_nhanvien.setRowSelectionInterval(i, i);
+                }
+            }
+            for (int i = 0; i < list.size(); i++) {
+                if (find_id.equalsIgnoreCase(list.get(i).getUsername())) {
 
                     find_check = true;
                     tbl_nhanvien.setRowSelectionInterval(i, i);
@@ -633,6 +670,7 @@ public class P_nhanvien extends javax.swing.JPanel {
                 String sql = "update nhanvien set tennv=?,sodienthoai=?,diachi=?,gioitinh=?"
                 + ",email=?,username=?,password=?,manhomquyen=? where manv=?";
                 PreparedStatement pst = connection.prepareStatement(sql);
+                txt_manv.setEnabled(false);
                 pst.setString(1, txt_tennv.getText());
                 pst.setString(2, txt_sodt.getText());
                 pst.setString(3, txt_diachi.getText());

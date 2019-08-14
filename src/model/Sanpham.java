@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author DELL
- */
+
 public class Sanpham {
 
     String masp, tensp, donvi, hangsp, vitri;
