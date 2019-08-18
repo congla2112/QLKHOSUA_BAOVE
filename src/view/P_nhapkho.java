@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import model.Nhanvien;
 import model.Nhapkho;
 
 /**
@@ -34,6 +35,7 @@ public class P_nhapkho extends javax.swing.JPanel {
      * Creates new form P_nhapkho
      */
     h_Utils panel = new h_Utils();
+    private String s;
 
     public void init_index() {
 
@@ -551,15 +553,15 @@ public class P_nhapkho extends javax.swing.JPanel {
                     .addComponent(btn_manv))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_lammoi)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_tim))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jLabel9)
                         .addComponent(txt_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbb_vitri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_lammoi)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_tim)))
+                        .addComponent(cbb_vitri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -784,7 +786,7 @@ public class P_nhapkho extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbb_nccActionPerformed
 
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_lammoi;
     private javax.swing.JButton btn_manv;

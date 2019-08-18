@@ -38,7 +38,6 @@ public class h_Utils {
     
     public void setPanel(JPanel panel, CardLayout cLayout){
         panel.setLayout(cLayout);
-        panel.add("p_home", new P_home());
         panel.add("p_khachhang", new P_khachhang());
         panel.add("p_nhapkho", new P_nhapkho());
         panel.add("p_sanpham", new P_sanpham());

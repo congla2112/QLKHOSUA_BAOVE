@@ -18,10 +18,7 @@ public class Trangchu_1 extends javax.swing.JFrame {
     CardLayout cLayout = new CardLayout();
     h_Utils panel = new h_Utils();
     
-    
-    
-    
-    
+
     
     public Trangchu_1() {
         initComponents();

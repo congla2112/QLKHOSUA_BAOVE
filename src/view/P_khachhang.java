@@ -557,7 +557,7 @@ public class P_khachhang extends javax.swing.JPanel {
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-        if (index != -1) {
+        if (index > -1) {
             int ret = JOptionPane.showConfirmDialog(this, "Xác nhận xóa?",
                     "Confirm", JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
